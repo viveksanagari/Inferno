@@ -5,7 +5,7 @@
 About DPMI MP:  
   
      --> The MP application taps one or more links and does packet capturing, packet filtering & distribute
-     	 measurement data. It then transfers the captured data to the consumers attached to measuring 
+     	 measurement data. It then transfers the captured data to the consumers attached to measuring
 	 area network(MArN).
   
   
@@ -20,8 +20,8 @@ About DPMI BITRATE:
 About Inferno:
   
      --> Inferno is a RESTful interface which is accessible to the user through a web interface(CURL/Browser) 
-     	 to control the measurement streams on bit rate application and be able to store this to a 
-	 database and have a data visualization.
+     	 to control the measurement streams on bit rate application and be able to store this to a
+	 	database and have a data visualization.
  
 	Exception: User should have authorized credentials to access the Inferno interface.  
       
@@ -70,8 +70,8 @@ REQUIREMENTS:
 		
 INSTALLATIONS:
 
-     Note: First login as root user in order to avoid 'Permission denied' interruptions, at any point of the 
-     	   installation process.	
+     Note: First login as root user in order to avoid 'Permission denied' interruptions, at any point of the
+     		installation process.	
      
      1. DPMI INSTALLATIONS: 
 	
@@ -145,6 +145,38 @@ INFERNO RESTful Interface:
 
      The server runs on the default port 5000. The clients can access the server from terminal (using CURL) 
      or the web browser with authorized credentials.
+     
      The authorized credentials to access the API are:
 		a. username --> dpmi
 		b. password --> dpmi
+         
+     The services provided by the INFERNO:
+	
+		a. Start stream:	[ Used to start only one stream, use 'addstream' to start multiple]
+
+			curl -u dpmi http://localhost:5000/startstream/<stream>
+
+
+		b. Add stream:		[ Used to add single/multiple streams ]
+
+			curl -u dpmi http://localhost:5000/addstream/<streams>
+
+
+		c. Change stream: 	[ Used to change to one stream ]
+
+			curl -u dpmi http://localhost:5000/changestream/<stream>
+
+
+		d. Delete stream:	[ Used to delete single/multiple streams ]
+
+			curl -u dpmi http://localhost:5000/deletestream/<streams>
+
+
+		e. Show stream:		[ Used to show all the running streams ]
+
+			curl -u dpmi http://localhost:5000/showstream
+
+
+		f. stop service:	[ Used to stop all running streams at once]
+
+			curl -u dpmi http://localhost:5000/stop
