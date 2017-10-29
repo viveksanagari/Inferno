@@ -6,7 +6,7 @@ About DPMI MP:
   
      --> The MP application taps one or more links and does packet capturing, packet filtering & distribute
      	 measurement data. It then transfers the captured data to the consumers attached to measuring
-	 area network(MArN).
+	 	 area network(MArN).
   
   
 About DPMI BITRATE:  
@@ -19,9 +19,9 @@ About DPMI BITRATE:
 
 About Inferno:
   
-     --> Inferno is a RESTful interface which is accessible to the user through a web interface(CURL/Browser) 
+     --> Inferno is a RESTful interface which is accessible to a user through a web interface(CURL/Browser)
      	 to control the measurement streams on bit rate application and be able to store this to a
-	 	database and have a data visualization.
+	 	 database and have a data visualization.
  
 	Exception: User should have authorized credentials to access the Inferno interface.  
       
