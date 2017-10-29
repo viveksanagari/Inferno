@@ -5,8 +5,8 @@
 About DPMI MP:  
   
      --> The MP application taps one or more links and does packet capturing, packet filtering & distribute
-     	 measurement data. It then transfers the captured data to the consumers attached to measuring area 
-	 network(MArN).
+     	 measurement data. It then transfers the captured data to the consumers attached to measuring 
+	 area network(MArN).
   
   
 About DPMI BITRATE:  
@@ -20,8 +20,8 @@ About DPMI BITRATE:
 About Inferno:
   
      --> Inferno is a RESTful interface which is accessible to the user through a web interface(CURL/Browser) 
-     	 to control the measurement streams on bit rate application and be able to store this to a database 
-	 and have a data visualization.
+     	 to control the measurement streams on bit rate application and be able to store this to a 
+	 database and have a data visualization.
  
 	Exception: User should have authorized credentials to access the Inferno interface.  
       
@@ -31,7 +31,7 @@ Functionalities provided to the user by Inferno RESTful Interface:
      --> Start a stream: Start a stream to monitor the bitrate traffic on the interface.
      --> Add streams: Add multiple streams to monitor the bitrate traffic on the interface.
      --> Change to another stream: Change to another stream to monitor the bitrate traffic on the interface.
-     --> Delete streams: Delete multiple streams to monitor the rest of the bitrate traffic on the interface.
+     --> Delete streams: Delete multiple streams to monitor the rest of bitrate traffic on the interface.
      --> Show running streams: Show all streams currently monitoring the bitrate traffic on the interface.
      --> Stop all the streams: Stop all the streams on the interface.
      --> Visualize data of the bitrate traffic in Grafana.
@@ -75,70 +75,76 @@ INSTALLATIONS:
      
      1. DPMI INSTALLATIONS: 
 	
-	a. Clone 'mp' from git:
-		git clone https://github.com/DPMI/mp.git
-		cd mp
-		autoreconf -si
-		mkdir build && cd build 
-		../configure
-		make && make install
+		a. Clone 'mp' from git:
+			git clone https://github.com/DPMI/mp.git
+			cd mp
+			autoreconf -si
+			mkdir build && cd build 
+			../configure
+			make && make install
 
 
-   	b. Clone 'libcap_utils' from git:
-		git clone https://github.com/DPMI/libcap_utils.git
-		cd libcap_utils
-		autoreconf -si
-		mkdir build && cd build
+   		b. Clone 'libcap_utils' from git:
+			git clone https://github.com/DPMI/libcap_utils.git
+			cd libcap_utils
+			autoreconf -si
+			mkdir build && cd build
+			../configure
+			make && make install
 
-		../configure
-		make && make install
 
-
-   	c. Clone 'consumer-bitrate' from git:
-		git clone https://github.com/DPMI/consumer-bitrate.git
-		cd consumer-bitrate
-		make
+   		c. Clone 'consumer-bitrate' from git:
+			git clone https://github.com/DPMI/consumer-bitrate.git
+			cd consumer-bitrate
+			make
 	
      2. SYSTEM REQUIREMENT INSTALLATIONS:
    
-	a. Install 'automake', 'autoconf', 'pkg-config', 'build-essential', 'libtool', 'libpcap-dev', 
-	   'libmysqlclient-dev', 'librrd-dev', 'libqd-dev' packages from APT repository.
+		a. Install 'automake', 'autoconf', 'pkg-config', 'build-essential', 'libtool', 'libpcap-dev', 
+		   'libmysqlclient-dev', 'librrd-dev', 'libqd-dev' packages from APT repository.
 	
-		Use 'sudo apt-get <package-name>'
+			Use 'sudo apt-get <package-name>'
 
-	b. Install pip:
+		b. Install pip:
 	
-		sudo apt-get install python-pip python-dev
-		sudo pip install --upgrade pip 
+			sudo apt-get install python-pip python-dev
+			sudo pip install --upgrade pip 
 	
-	c. Install Influxdb:	('https://portal.influxdata.com/downloads')
+		c. Install Influxdb:	('https://portal.influxdata.com/downloads')
 	
-	   Installing on ubuntu:
+		   	Installing on ubuntu:
 	
-		wget https://dl.influxdata.com/influxdb/releases/influxdb_1.3.6_amd64.deb
-		sudo dpkg -i influxdb_1.3.6_amd64.deb
-		sudo service influxdb start
+			wget https://dl.influxdata.com/influxdb/releases/influxdb_1.3.6_amd64.deb
+			sudo dpkg -i influxdb_1.3.6_amd64.deb
+			sudo service influxdb start
 	
-	d. Install Influxdb python module:	(InfluxDB-Python)
+		d. Install Influxdb python module:	(InfluxDB-Python)
 	
-		sudo pip install influxdb
+			sudo pip install influxdb
 	
-	e. Install Flask python module:
+		e. Install Flask python module:
 	
-		sudo pip install Flask
+			sudo pip install Flask
 	
-	f. Install Grafana:	('http://docs.grafana.org/installation/')
+		f. Install Grafana:	('http://docs.grafana.org/installation/')
 	
-		Add the following line to your /etc/apt/sources.list file:
-		deb https://packagecloud.io/grafana/stable/debian/ jessie main
+			Add the following line to your /etc/apt/sources.list file:
+			deb https://packagecloud.io/grafana/stable/debian/ jessie main
 	
-		Then add the Package Cloud key from terminal:
-		curl https://packagecloud.io/gpg.key | sudo apt-key add -
+			Then add the Package Cloud key from terminal:
+			curl https://packagecloud.io/gpg.key | sudo apt-key add -
 
-		Update and install grafana:
-		sudo apt-get update
-		sudo apt-get install grafana
+			Update and install grafana:
+			sudo apt-get update
+			sudo apt-get install grafana
 	
-		Start grafana server:
-		sudo service grafana-server start
+			Start grafana server:
+			sudo service grafana-server start
      	
+INFERNO RESTful Interface:
+
+     The server runs on the default port 5000. The clients can access the server from terminal (using CURL) 
+     or the web browser with authorized credentials.
+     The authorized credentials to access the API are:
+		a. username --> dpmi
+		b. password --> dpmi
