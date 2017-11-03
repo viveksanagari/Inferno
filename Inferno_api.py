@@ -11,17 +11,33 @@ app = Flask(__name__)
 
 global mainstream
 mainstream=[]
+global streams
+streams=[]
 
+
+def bitrate(str):
+	global stream
+	stream=str
+	os.chdir("/home/vivek/consumer-bitrate")
+	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i","wlp2s0.1",stream],stdout=subprocess.PIPE) 
+	
+	
 @app.route('/startstream/<stream>', methods=['GET'])
 def main(stream):
 	global mainstream
-	if stream in mainstream:
-			return '... bitrate stream %s is already running...\n' %stream
+	if not streams:
+		if stream in mainstream:
+				return '... bitrate stream %s is already running...\n' %stream
+		else:
+				streams.append(stream)
+				mainstream=mainstream+streams
+				bitrate_thread=threading.Thread(target=bitrate,args=(stream,)).start()
+				bitrate_thread.deamon=True
+				return '...bitrate stream  %s started...\n' %stream
 	else:
-			streams.append(stream)
-			mainstream=mainstream+streams
-			return '...bitrate stream  %s started...\n' %stream
-			
+		return 'There is a stream already running, use another\n'
+
+	
 @app.route('/showstream', methods=['GET'])
 
 @app.route('/addstream/<add>', methods=['GET'])
