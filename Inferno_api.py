@@ -55,6 +55,11 @@ def show():
 @app.route('/changestream/<stream>', methods=['GET'])
 
 @app.route('/stop', methods=['GET'])
+def stop():
+	pkill()
+	del (mainstream[:],streams[:])	
+	return "...bitrate stream killed...\n"	
+
 
 if __name__ == "__main__":
 	app.run(host='localhost', port=5000, debug=True)    
