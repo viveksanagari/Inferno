@@ -9,8 +9,19 @@ from threading import Thread
 
 app = Flask(__name__)
 
-@app.route('/startstream/<stream>', methods=['GET'])
+global mainstream
+mainstream=[]
 
+@app.route('/startstream/<stream>', methods=['GET'])
+def main(stream):
+	global mainstream
+	if stream in mainstream:
+			return '... bitrate stream %s is already running...\n' %stream
+	else:
+			streams.append(stream)
+			mainstream=mainstream+streams
+			return '...bitrate stream  %s started...\n' %stream
+			
 @app.route('/showstream', methods=['GET'])
 
 @app.route('/addstream/<add>', methods=['GET'])
