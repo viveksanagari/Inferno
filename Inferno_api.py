@@ -40,7 +40,14 @@ def main(stream):
 
 	
 @app.route('/showstream', methods=['GET'])
+def show():
+	if not mainstream: 
+		return '...No streams available...\n'
+	else:
+		show=" ".join(str(S) for S in mainstream)
+		return '...running bitrate streams %s...\n' %show
 
+	
 @app.route('/addstream/<add>', methods=['GET'])
 
 @app.route('/deletestream/<delet>', methods=['GET'])
