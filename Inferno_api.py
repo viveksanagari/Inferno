@@ -1,7 +1,7 @@
 import os, sys
 import subprocess
 from subprocess import Popen
-from bitrate_db import influx
+from Inferno_db import influx
 from flask import Flask
 from flask import request, Response, make_response
 import threading
@@ -19,7 +19,8 @@ def bitrate(str):
 	global stream
 	stream=str
 	os.chdir("/home/vivek/consumer-bitrate")
-	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i","wlp2s0.1",stream],stdout=subprocess.PIPE) 
+	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i","wlp2s0.1",stream],stdout=subprocess.PIPE)
+	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,)).start()
 	
 	
 @app.route('/startstream/<stream>', methods=['GET'])
