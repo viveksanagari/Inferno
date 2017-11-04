@@ -71,7 +71,29 @@ def add(add):
 
 	
 @app.route('/deletestream/<delet>', methods=['GET'])
+def delete(delet):
+	global mainstream
+	
+	delet=delet.split(',')
 
+	suredel=[]
+	suredel=list(set(delet).intersection(mainstream))
+
+	cantdel=[]
+	cantdel=list(set(delet)-set(suredel))
+	
+	if not cantdel:
+		strsuredel=",".join(str(l) for l in suredel)
+
+		if set(suredel).intersection(streams)!=0 :
+			del streams[:]
+
+		return "...bitrate stream %s deleted...\n" %(strsuredel)
+
+	else:
+		return '...No streams available to delete...\n'	
+	
+	
 @app.route('/changestream/<stream>', methods=['GET'])
 
 @app.route('/stop', methods=['GET'])
