@@ -99,6 +99,18 @@ def delete(delet):
 	
 	
 @app.route('/changestream/<stream>', methods=['GET'])
+def change(stream):
+
+	global ch
+	global mainstream
+
+	ch=stream
+	if ch in streams:
+		return 'change to another stream\n'		
+	else:
+		main(ch)
+		return 'changed to %s\n' %ch
+
 
 @app.route('/stop', methods=['GET'])
 def stop():
