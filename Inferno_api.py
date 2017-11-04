@@ -7,7 +7,11 @@ from flask import request, Response, make_response
 import threading
 from threading import Thread
 
-app = Flask(__name__)
+dpmi = Flask(__name__)
+
+interface="wlp2s0"
+
+directory="/home/vivek/consumer-bitrate"
 
 global mainstream
 mainstream=[]
@@ -18,12 +22,12 @@ streams=[]
 def bitrate(str):
 	global stream
 	stream=str
-	os.chdir("/home/vivek/consumer-bitrate")
-	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i","wlp2s0.1",stream],stdout=subprocess.PIPE)
+	os.chdir(directory)
+	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i",interface,stream],stdout=subprocess.PIPE)
 	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,)).start()
 	
 	
-@app.route('/startstream/<stream>', methods=['GET'])
+@dpmi.route('/startstream/<stream>', methods=['GET'])
 def main(stream):
 	global mainstream
 	if not streams:
@@ -39,7 +43,7 @@ def main(stream):
 		return 'There is a stream already running, use another\n'
 
 	
-@app.route('/showstream', methods=['GET'])
+@dpmi.route('/showstream', methods=['GET'])
 def show():
 	if not mainstream: 
 		return '...No streams available...\n'
@@ -48,7 +52,7 @@ def show():
 		return '...running bitrate streams %s...\n' %show
 
 	
-@app.route('/addstream/<add>', methods=['GET'])
+@dpmi.route('/addstream/<add>', methods=['GET'])
 def add(add):
 	global mainstream
 
@@ -75,7 +79,7 @@ def add(add):
 		return '...stream %s already running...\n...streams %s added...\n' %(stralready,strnew) 
 
 	
-@app.route('/deletestream/<delet>', methods=['GET'])
+@dpmi.route('/deletestream/<delet>', methods=['GET'])
 def delete(delet):
 	global mainstream
 	
@@ -107,7 +111,7 @@ def delete(delet):
 			return "...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n" %(strsuredel,strcantdel)
 			
 		
-@app.route('/changestream/<stream>', methods=['GET'])
+@dpmi.route('/changestream/<stream>', methods=['GET'])
 def change(stream):
 
 	global ch
@@ -121,7 +125,7 @@ def change(stream):
 		return 'changed to %s\n' %ch
 
 
-@app.route('/stop', methods=['GET'])
+@dpmi.route('/stop', methods=['GET'])
 def stop():
 	pkill()
 	del (mainstream[:],streams[:])	
@@ -129,4 +133,4 @@ def stop():
 
 
 if __name__ == "__main__":
-	app.run(host='localhost', port=5000, debug=True)    
+	dpmi.run(host='localhost', port=5000, debug=True)    
