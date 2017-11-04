@@ -49,7 +49,19 @@ def show():
 
 	
 @app.route('/addstream/<add>', methods=['GET'])
+def add(add):
+	addstream=add.split(',')
+	b=",".join(addstream)
+	
+	already=[]
+	already=list(set(addstream).intersection(mainstream))
+	
+	new=[]
+	new=list(set(addstream)-set(already))
 
+	bitrate_add_thread=threading.Thread(target=bitrate,args=(new,)).start()
+	bitrate_add_thread.deamon=True
+	
 @app.route('/deletestream/<delet>', methods=['GET'])
 
 @app.route('/changestream/<stream>', methods=['GET'])
