@@ -50,6 +50,8 @@ def show():
 	
 @app.route('/addstream/<add>', methods=['GET'])
 def add(add):
+	global mainstream
+
 	addstream=add.split(',')
 	b=",".join(addstream)
 	
@@ -60,6 +62,8 @@ def add(add):
 	new=[]
 	new=list(set(addstream)-set(already))
 	strnew=" ".join(str(i) for i in new)
+	
+	mainstream=mainstream+new
 	
 	bitrate_add_thread=threading.Thread(target=bitrate,args=(strnew,)).start()
 	bitrate_add_thread.deamon=True
