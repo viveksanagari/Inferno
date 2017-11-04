@@ -105,10 +105,19 @@ def delete(delet):
 		return '...No streams available to delete...\n'	
 		
 	else:
+		mainstream=list(set(mainstream)-set(suredel))
+		strmainstream=",".join(str(k) for k in mainstream)
+
+		pkill()
+		add(strmainstream)
+
+		strsuredel=" ".join(str(l) for l in suredel)
+		strcantdel=" ".join(str(m) for m in cantdel)
+		
 		if set(suredel).intersection(streams)!=0 :
 			del streams[:]
 			
-		return "...bitrate stream %s deleted...\n" %(strsuredel)
+		return "...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n" %(strsuredel,strcantdel)
 		
 		
 @app.route('/changestream/<stream>', methods=['GET'])
