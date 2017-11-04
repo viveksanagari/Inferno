@@ -55,12 +55,20 @@ def add(add):
 	
 	already=[]
 	already=list(set(addstream).intersection(mainstream))
+	stralready=" ".join(str(j) for j in already)
 	
 	new=[]
 	new=list(set(addstream)-set(already))
-
-	bitrate_add_thread=threading.Thread(target=bitrate,args=(new,)).start()
+	strnew=" ".join(str(i) for i in new)
+	
+	bitrate_add_thread=threading.Thread(target=bitrate,args=(strnew,)).start()
 	bitrate_add_thread.deamon=True
+	
+	if not already:
+		return '...adding bitrate streams %s...\n' %strnew
+	else:
+		return '...stream %s already running...\n...streams %s added...\n' %(stralready,strnew) 
+
 	
 @app.route('/deletestream/<delet>', methods=['GET'])
 
