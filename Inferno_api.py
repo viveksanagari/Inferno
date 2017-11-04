@@ -83,42 +83,29 @@ def delete(delet):
 
 	suredel=[]
 	suredel=list(set(delet).intersection(mainstream))
-
+	strsuredel=" ".join(str(l) for l in suredel)
+		
 	cantdel=[]
 	cantdel=list(set(delet)-set(suredel))
+	strcantdel=" ".join(str(m) for m in cantdel)
 	
-	if not cantdel:
-		mainstream=list(set(mainstream)-set(suredel))
-		strmainstream=",".join(str(k) for k in mainstream) # str of mainstream
-	
-		pkill()
-		add(strmainstream)
-		
-		strsuredel=",".join(str(l) for l in suredel)
+	mainstream=list(set(mainstream)-set(suredel))
+	strmainstream=",".join(str(k) for k in mainstream)
 
-		if set(suredel).intersection(streams)!=0 :
-			del streams[:]
-
-		return "...bitrate stream %s deleted...\n" %(strsuredel)
-
-	elif not suredel:
-		return '...No streams available to delete...\n'	
-		
+	if not suredel:
+		return '...No streams available to delete...\n'
 	else:
-		mainstream=list(set(mainstream)-set(suredel))
-		strmainstream=",".join(str(k) for k in mainstream)
-
 		pkill()
 		add(strmainstream)
-
-		strsuredel=" ".join(str(l) for l in suredel)
-		strcantdel=" ".join(str(m) for m in cantdel)
 		
 		if set(suredel).intersection(streams)!=0 :
 			del streams[:]
 			
-		return "...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n" %(strsuredel,strcantdel)
-		
+		if not cantdel:		
+			return "\n...bitrate stream %s deleted...\n\n" %(strsuredel)
+		else:
+			return "...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n" %(strsuredel,strcantdel)
+			
 		
 @app.route('/changestream/<stream>', methods=['GET'])
 def change(stream):
