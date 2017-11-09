@@ -19,6 +19,11 @@ global streams
 streams=[]
 
 
+def pkill():
+	os.system('sudo pkill bitrate')
+	return
+
+
 def bitrate(str):
 	global stream
 	stream=str
