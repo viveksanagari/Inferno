@@ -124,10 +124,14 @@ def change(stream):
 
 	ch=stream
 	if ch in streams:
-		return 'change to another stream\n'		
+		return '\n...bitrate stream %s already running, change to another stream...\n\n' %ch
 	else:
+		stop()
+		del streams[:]
+		mainstream=list(set(mainstream)-set(streams))
+
 		main(ch)
-		return 'changed to %s\n' %ch
+		return '\n...bitrate stream changed to %s...\n\n' %ch
 
 
 @dpmi.route('/stop', methods=['GET'])
