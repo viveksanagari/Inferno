@@ -103,8 +103,10 @@ def delete(delet):
 		return '...No streams available to delete...\n'
 	else:
 		pkill()
-		add(strmainstream)
-		
+		for h in mainstream:
+			bitrate_add_thread=threading.Thread(target=bitrate,args=(h,)).start() 
+			bitrate_add_thread.deamon=True	
+						
 		if set(suredel).intersection(streams)!=0 :
 			del streams[:]
 			
