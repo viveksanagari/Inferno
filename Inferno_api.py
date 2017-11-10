@@ -41,6 +41,7 @@ def bitrate(str):
 	
 	
 @dpmi.route('/startstream/<stream>', methods=['GET'])
+@auth
 def main(stream):
 	global mainstream
 	
@@ -66,6 +67,7 @@ def main(stream):
 
 	
 @dpmi.route('/showstream', methods=['GET'])
+@auth
 def show():
 	if not mainstream: 
 		return '...No streams available...\n'
@@ -75,6 +77,7 @@ def show():
 
 	
 @dpmi.route('/addstream/<add>', methods=['GET'])
+@auth
 def add(add):
 	global mainstream
 
@@ -102,6 +105,7 @@ def add(add):
 
 	
 @dpmi.route('/deletestream/<delet>', methods=['GET'])
+@auth
 def delete(delet):
 	global mainstream
 	
@@ -136,6 +140,7 @@ def delete(delet):
 			
 		
 @dpmi.route('/changestream/<stream>', methods=['GET'])
+@auth
 def change(stream):
 
 	global ch
@@ -154,6 +159,7 @@ def change(stream):
 
 
 @dpmi.route('/stop', methods=['GET'])
+@auth
 def stop():
 	pkill()
 	del (mainstream[:],streams[:])	
