@@ -75,7 +75,7 @@ def add(add):
 	mainstream=mainstream+new
 	
 	for s in new:
-		bitrate_add_thread=threading.Thread(target=bitrate,args=(s,)).start()
+		bitrate_add_thread=threading.Thread(target=bitrate,args=(strnew,)).start()
 		bitrate_add_thread.deamon=True
 	
 	if not already:
