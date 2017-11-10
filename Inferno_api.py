@@ -29,7 +29,7 @@ def bitrate(str):
 	stream=str
 	os.chdir(directory)
 	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i",interface,stream],stdout=subprocess.PIPE)
-	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,)).start()
+	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,stream,)).start()
 	
 	
 @dpmi.route('/startstream/<stream>', methods=['GET'])
@@ -45,7 +45,7 @@ def main(stream):
 				bitrate_thread.deamon=True
 				return '...bitrate stream  %s started...\n' %stream
 	else:
-		return 'There is a stream already running, use another\n'
+		return '\n...a stream has already been started, use "addstream" to add...\n\n'
 
 	
 @dpmi.route('/showstream', methods=['GET'])
@@ -75,7 +75,7 @@ def add(add):
 	mainstream=mainstream+new
 	
 	for s in new:
-		bitrate_add_thread=threading.Thread(target=bitrate,args=(strnew,)).start()
+		bitrate_add_thread=threading.Thread(target=bitrate,args=(s,)).start()
 		bitrate_add_thread.deamon=True
 	
 	if not already:
