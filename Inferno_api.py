@@ -19,6 +19,16 @@ global streams
 streams=[]
 
 
+def auth(w):
+	@wraps(w)
+	def q(*args, **kwargs):
+		r = request.authorization
+		if r and r.username == 'dpmi' and r.password == 'dpmi':
+			return w(*args, **kwargs)
+		return make_response('\n...Could not verify...\nPlease check the credentials\n', 401, {'WWW-Authenticate' : 'Basic realm = "login required"'})
+	return q
+
+
 def pkill():
 	os.system('sudo pkill bitrate')
 	return
