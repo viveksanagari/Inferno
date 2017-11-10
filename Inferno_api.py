@@ -4,6 +4,7 @@ from subprocess import Popen
 from Inferno_db import influx
 from flask import Flask
 from flask import request, Response, make_response
+from functools import wraps
 import threading
 from threading import Thread
 
@@ -52,13 +53,13 @@ def main(stream):
 	else:	
 		if not streams:
 			if stream in mainstream:
-					return '... bitrate stream %s is already running...\n' %stream
+					return '\n... bitrate stream %s is already running...\n\n' %stream
 			else:
 					streams.append(stream)
 					mainstream=mainstream+streams
 					bitrate_thread=threading.Thread(target=bitrate,args=(stream,)).start()
 					bitrate_thread.deamon=True
-					return '...bitrate stream  %s started...\n' %stream
+					return '\n...bitrate stream  %s started...\n\n' %stream
 				
 		elif stream in mainstream:
 			return '\n...bitrate stream %s is already running...\n\n' %stream
@@ -70,10 +71,10 @@ def main(stream):
 @auth
 def show():
 	if not mainstream: 
-		return '...No streams available...\n'
+		return '\n...No streams available...\n\n'
 	else:
 		show=" ".join(str(S) for S in mainstream)
-		return '...running bitrate streams %s...\n' %show
+		return '\n...running bitrate streams %s...\n\n' %show
 
 	
 @dpmi.route('/addstream/<add>', methods=['GET'])
@@ -99,9 +100,9 @@ def add(add):
 		bitrate_add_thread.deamon=True
 	
 	if not already:
-		return '...adding bitrate streams %s...\n' %strnew
+		return '\n...adding bitrate streams %s...\n\n' %strnew
 	else:
-		return '...stream %s already running...\n...streams %s added...\n' %(stralready,strnew) 
+		return '\n...stream %s already running...\n...streams %s added...\n\n' %(stralready,strnew) 
 
 	
 @dpmi.route('/deletestream/<delet>', methods=['GET'])
@@ -123,7 +124,7 @@ def delete(delet):
 	strmainstream=",".join(str(k) for k in mainstream)
 
 	if not suredel:
-		return '...No streams available to delete...\n'
+		return '\n...stream(s) not available to delete...\n\n'
 	else:
 		pkill()
 		for h in mainstream:
@@ -136,7 +137,7 @@ def delete(delet):
 		if not cantdel:		
 			return "\n...bitrate stream %s deleted...\n\n" %(strsuredel)
 		else:
-			return "...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n" %(strsuredel,strcantdel)
+			return "\n...bitrate stream %s deleted...\n...bitrate stream %s not available to delete...\n\n" %(strsuredel,strcantdel)
 			
 		
 @dpmi.route('/changestream/<stream>', methods=['GET'])
@@ -163,7 +164,7 @@ def change(stream):
 def stop():
 	pkill()
 	del (mainstream[:],streams[:])	
-	return "...bitrate stream killed...\n"	
+	return "\n...bitrate stream killed...\n\n"	
 
 
 if __name__ == "__main__":
