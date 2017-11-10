@@ -18,7 +18,7 @@ def influx(str):
                       {
                        "measurement": "bitrate",
                        "tags": {
-                           "host": " ",
+                           "{0}".format(stream): " ",
                         },
                        "fields": {
                             "value": b[0],
