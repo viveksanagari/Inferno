@@ -123,7 +123,7 @@ def change(stream):
 	global mainstream
 
 	ch=stream
-	if ch in streams:
+	if ch in mainstream:
 		return '\n...bitrate stream %s already running, change to another stream...\n\n' %ch
 	else:
 		stop()
