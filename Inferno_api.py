@@ -33,17 +33,26 @@ def bitrate(str):
 @dpmi.route('/startstream/<stream>', methods=['GET'])
 def main(stream):
 	global mainstream
-	if not streams:
-		if stream in mainstream:
-				return '... bitrate stream %s is already running...\n' %stream
+	
+	mul=stream.split(',')
+	
+	if len(mul)>1:
+		return '\n...start with only one stream, use "addstream" for adding multiple streams...\n\n'
+	else:	
+		if not streams:
+			if stream in mainstream:
+					return '... bitrate stream %s is already running...\n' %stream
+			else:
+					streams.append(stream)
+					mainstream=mainstream+streams
+					bitrate_thread=threading.Thread(target=bitrate,args=(stream,)).start()
+					bitrate_thread.deamon=True
+					return '...bitrate stream  %s started...\n' %stream
+				
+		elif stream in mainstream:
+			return '\n...bitrate stream %s is already running...\n\n' %stream
 		else:
-				streams.append(stream)
-				mainstream=mainstream+streams
-				bitrate_thread=threading.Thread(target=bitrate,args=(stream,)).start()
-				bitrate_thread.deamon=True
-				return '...bitrate stream  %s started...\n' %stream
-	else:
-		return '\n...a stream has already been started, use "addstream" to add...\n\n'
+			return '\n...a stream has already been started, use "addstream" to add the streams...\n\n'
 
 	
 @dpmi.route('/showstream', methods=['GET'])
