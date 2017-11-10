@@ -1,11 +1,14 @@
 from influxdb import InfluxDBClient
 
+db='dragon'
+
 global influx
 
-def influx(str):
+def influx(str,stream):
+	s=stream.split('::')
   	counter=8
      	linenum=1
-	client=InfluxDBClient('localhost',8086,'admin','admin',database='vivek3')
+	client=InfluxDBClient('localhost',8086,'admin','admin',database=db)
   	for line in iter(str.readline,''):
 		line=line.rstrip()
 		if(line == ''):
