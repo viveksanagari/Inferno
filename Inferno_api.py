@@ -25,11 +25,9 @@ def pkill():
 
 
 def bitrate(str):
-	global stream
-	stream=str
 	os.chdir(directory)
-	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i",interface,stream],stdout=subprocess.PIPE)
-	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,stream,)).start()
+	bitrate=subprocess.Popen(["unbuffer","./bitrate","-i",interface,str],stdout=subprocess.PIPE)
+	influx_thread=threading.Thread(target=influx,args=(bitrate.stdout,str,)).start()
 	
 	
 @dpmi.route('/startstream/<stream>', methods=['GET'])
