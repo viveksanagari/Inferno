@@ -140,7 +140,34 @@ INSTALLATIONS:
 	
 			Start grafana server:
 			sudo service grafana-server start
-     	
+     
+     
+*********************************************************************************************************
+Note: After all the installations to get the api working on your localhost, do the below changes; 
+
+	a. After installing all the requirements, create an influxdb database manually using commands:
+		In terminal,
+			influx
+			create database <database name> 
+		You can verify if it is created or not using "show databases"
+	
+	b. In file "bitrate_db.py", Replace the 'db' variable to the influx database name created above,
+	   where the bitrate traffic is to be stored.
+	c. In file "bitrate_api.py", Replace the 'interface' variable to the interface on which
+	   the bitrate traffic is to be monitored.
+	d. In file "bitrate_api.py", Replace the 'directory' variable to the path where consumer-bitrate
+	   is installed.
+	e. Please try not to change the file name of "Inferno_db", if changed you have to, replace the
+	   changed name of the file in the "Inferno_api.py" file on line 4 which shows
+	   "from Inferno_db import influx".
+	f. Add the influx database given above to the datasource in Grafana, to display the traffic.
+	g. Create a dashboard with created datasource, Use appropriate tags (automatically created) in the
+	   grafana query to view the requried streams.
+	h. Use 'distinct' aggregation in the 'select' column of the query in the grafana dashboard to view
+	   the graph.
+*********************************************************************************************************
+
+	
 INFERNO RESTful Interface:
 
      The server runs on the default port 5000. The clients can access the server from terminal (using CURL) 
