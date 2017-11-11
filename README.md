@@ -151,11 +151,11 @@ Note: After all the installations to get the api working on your localhost, do t
 			create database <database name> 
 		You can verify if it is created or not using "show databases"
 	
-	b. In file "bitrate_db.py", Replace the 'db' variable to the influx database name created above,
+	b. In file "Inferno_db.py", Replace the 'db' variable to the influx database name created above,
 	   where the bitrate traffic is to be stored.
-	c. In file "bitrate_api.py", Replace the 'interface' variable to the interface on which
+	c. In file "Inferno_api.py", Replace the 'interface' variable to the interface on which
 	   the bitrate traffic is to be monitored.
-	d. In file "bitrate_api.py", Replace the 'directory' variable to the path where consumer-bitrate
+	d. In file "Inferno_api.py", Replace the 'directory' variable to the path where consumer-bitrate
 	   is installed.
 	e. Please try not to change the file name of "Inferno_db", if changed you have to, replace the
 	   changed name of the file in the "Inferno_api.py" file on line 4 which shows
@@ -177,6 +177,18 @@ INFERNO RESTful Interface:
 		a. username --> dpmi
 		b. password --> dpmi
          
+	 
+ *********************************************************************************************************
+ Note:	
+
+	a. Ensure that you run the "Inferno_api.py" file, before using the service (by curl).
+	b. While adding/deleting multiple streams, seperate the streams using ","
+
+		Ex: "curl -u dpmi http://localhost:5000/addstream/01::01,01::02,01::03"
+	    	    "curl -u dpmi http://localhost:5000/deletestream/01::01,01::02,01::03"		
+ *********************************************************************************************************
+	 
+	 
      The services provided by the INFERNO:
 	
 		a. Start stream:	[ Used to start only one stream, use 'addstream' to start multiple]
