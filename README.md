@@ -219,3 +219,11 @@ INFERNO RESTful Interface:
 		f. stop service:	[ Used to stop all running streams at once]
 
 			curl -u dpmi http://localhost:5000/stop
+
+
+To view the data in the database use:
+
+	curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=<database_name>" --data-urlencode "q=SELECT * FROM bitrate"
+
+
+
