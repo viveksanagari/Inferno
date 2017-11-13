@@ -1,0 +1,19 @@
+Test number:     UR_2
+Requirement:     Web Interface
+Description:     User requires simple web interface to control the desired measurement streams.
+Test:            To check whether the API program is accessible through curl/browser.
+
+                 In Terminal type, “curl -u dpmi http://localhost:5000/<function>/<stream>”
+                 Where, functions are: startstream.
+                                       Stop.
+                                       addstream.
+                                       deletestream.
+                                       changestream.
+                                       showstream.
+                                        
+                 Note: while adding/deleting multiple streams separate streams using “,”
+                       Ex: curl -u dpmi http://localhost:5000/addstream/01::01,01::02,01::03
+                           curl -u dpmi http://localhost:5000/deletestream/01::01,01::02,01::03
+
+Expected Result: ‘curl’ command should get executed without showing “Failed to connect port 5000: Connection Refused” error.
+Test outcome:    API program is accessible without any error message.
