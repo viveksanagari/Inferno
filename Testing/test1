@@ -1,0 +1,10 @@
+Test number:     UR_1
+Requirement:     Authorized access
+Description:     User should be able to control the measurement streams only if correct
+                 credentials are provided.
+Test:            In Terminal type:
+                 “curl -u dpmi http://localhost:5000/<function>/<stream>”
+                 Now the user should be prompted to type the password.
+Expected Result: If the correct credentials are given then the user should be able to control the
+                 measurement streams.
+Test outcome:    User is being asked for authorization.
