@@ -1,0 +1,15 @@
+Test number:     UR_3
+Requirement:     Flexibility
+Description:     The product should be able to flexibly control the measurement streams using start, stop, add, delete, change and 
+                 show functionalities.
+Test:            To check whether the functionalities offered by the API to control the measurement streams are working correctly.
+                 
+                 In Terminal or Browser type,
+                 curl -u dpmi http://localhost:5000/startsream/<stream>
+                 curl -u dpmi http://localhost:5000/stop
+                 curl -u dpmi http://localhost:5000/addstream/<streams>
+                 curl -u dpmi http://localhost:5000/deletestream/<streams>
+                 curl -u dpmi http://localhost:5000/changestream/<stream>
+                 curl -u dpmi http://localhost:5000/showstream
+Expected Result: User should be able to start, stop, add, delete, change and show the measurement streams.
+Test outcome:    The functionalities offered by the API to control the measurement streams are working correctly.
