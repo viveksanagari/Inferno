@@ -1,0 +1,10 @@
+Test number:     UR_6
+Requirement:     Display the desired streams
+Description:     The user should be able to select specific tags corresponding to specific streams which are to be displayed in Grafana.
+Test:            To check whether multiple desired streams are being displayed distinctively or not.
+
+                 In Grafana select the tag values corresponding to the required stream. The tag key is “stream”.
+                 Ex: The tag key-value pair for stream 01::02 is shown as tag (stream) and the tag value is 02
+Expected Result: The graph for multiple streams should be displayed in multiple colours.
+Test outcome:    When multiple streams are running, Separate tags for corresponding streams are created automatically and graph is also
+                 displayed in multiple colours.
