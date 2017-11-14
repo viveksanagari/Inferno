@@ -1,0 +1,30 @@
+Test number:     UR_4
+Requirement:     Response messages
+Description:     The user should be displayed with appropriate response messages for the functions chosen.
+Test:            To check whether the user is displayed with the appropriate return message.
+                  
+                 In Terminal or Browser type,
+  
+                 curl -u dpmi http://localhost:5000/startsream/<stream>
+                 This should return: “...bitrate stream <stream> started...”
+                 
+                 curl -u dpmi http://localhost:5000/stop
+                 This should return: “...bitrate stream killed...”
+
+                 curl -u dpmi http://localhost:5000/addstream/<streams>
+                 This should return: “...adding bitrate streams <streams>...”
+
+                 curl -u dpmi http://localhost:5000/deletestream/<streams>
+                 This should return: “...bitrate stream <streams> deleted...”
+  
+                 curl -u dpmi http://localhost:5000/changestream/<stream>
+                 This should return: “...bitrate stream changed to <stream>...”
+
+                 curl -u dpmi http://localhost:5000/showstream
+                 This should return: “...running bitrate streams <streams> ...”
+           
+           Note: Trying to Start/add/change already running streams or trying to delete unavailable streams will display appropriate 
+                 return messages.
+           
+Expected Result: User should be able to see the return message for the chosen function.
+Test outcome:    Return messages for all the functionalities are being displayed properly.
