@@ -1,0 +1,9 @@
+Test number:     UR_5
+Requirement:     Retrieve data from database
+Description:     The user should also be able to retrieve the measurement data stored in the influx database.
+Test:            To check whether the data in the database is accessible to the user or not.
+                 
+                 In Terminal type,
+                 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=<database-name>" --data-urlencode "q=SELECT * FROM bitrate"
+Expected Result: The values stored in database should be displayed.
+Test outcome:    The values in the database are being displayed.
